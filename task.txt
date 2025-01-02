@@ -1,0 +1,13 @@
+Rest api 
+
+http://localhost:8000/users --> get list 
+http://localhost:8000/users --> post 
+http://localhost:8000/users --> patch update shivam shiva
+http://localhost:8000/users --> delete shivam 
+get /
+
+post 
+
+patch
+
+delete 
