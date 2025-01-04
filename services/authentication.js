@@ -5,11 +5,11 @@ const secret = process.env.secret;
 
 function createTokenForUser (user) {
     const payload = {
-    _id: user._id, emait: user.email,
+    _id: user._id, email: user.email,
     profileImageURL: user.profileImageURL, role: user.role,
     };
     const token = jwt.sign(payload, secret);
-  return token;
+    return token;
 }
 
 function validateToken (token) {

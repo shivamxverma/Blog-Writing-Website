@@ -1,29 +1,93 @@
+<style>
+  /* Navbar Background and Text Styling */
+  .navbar {
+    background-color: black; /* Black background */
+    color: #070606; /* White text */
+  }
+
+  .navbar-brand {
+    color: #13140e; /* Blue color for the logo */
+    font-weight: bold;
+    font-size: 1.5rem;
+    transition: color 0.3s ease-in-out; /* Smooth transition for hover effect */
+  }
+
+  .navbar-brand:hover {
+    color: #00ffff; /* Cyan color on hover */
+    text-decoration: none; /* Remove underline on hover */
+  }
+
+  .navbar-nav .nav-link {
+    color: #020000; /* White text for nav links */
+    transition: color 0.3s ease-in-out;
+  }
+
+  .navbar-nav .nav-link:hover {
+    color: #1e90ff; /* Blue text on hover */
+  }
+
+  .navbar-nav .dropdown-menu {
+    background-color: #000; /* Black background for dropdown */
+  }
+
+  .navbar-nav .dropdown-item {
+    color: #efe8e8; /* White text for dropdown items */
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .navbar-nav .dropdown-item:hover {
+    background-color: #1e90ff; /* Blue background on hover */
+    color: #ffffff; /* White text */
+  }
+
+  /* Active link styling */
+  .navbar-nav .nav-link.active {
+    color: #00ffff; /* Cyan for active link */
+    font-weight: bold;
+  }
+
+  /* Error Message Styling */
+  .alert-danger {
+    margin-top: 1rem;
+    font-weight: bold;
+    border: 2px solid #ff4c4c; /* Red border */
+  }
+</style>
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Blog Karo</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
+<div class="container-fluid">
+  <a class="navbar-brand" href="#">BlogKaro</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <% if (locals.user) { %>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="#">Add Blog</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Shivam
+            <%= locals.user.email %> 
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
           </ul>
         </li>
-      </ul>
-    </div>
+      <% } else { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Create Account</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+      <% } %>
+    </ul>
   </div>
+</div>
 </nav>
 
+<!-- Display an error message if exists -->
 <% if (locals.error) { %>
-  <div class="alert alert-danger" role="alert"><%= locals.error %></div>
+<div class="alert alert-danger" role="alert"><%= locals.error %></div>
 <% } %>
