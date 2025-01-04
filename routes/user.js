@@ -1,28 +1,34 @@
 const {Router} = require('express');
 const router = Router();
+const User = require('../models/user');
 
-router.get('/signin',(req,res)=>{
+router.get('/signin',(_,res)=>{
   return res.render('signin');
 })
 
-router.post('/signin',(req,res)=>{
+router.post('/signin',async(req,res)=>{
   const {email,password} = req.body;
-  const user = User.matchPassword(email,password);
-
-  console.log('User: ',user);
-  return res.redirect("/");
+  try{
+    const token = await User.matchPasswordandcreatetoken(email,password);
+    return res.cookie('token',token).redirect('/');
+  }
+  catch(error){
+    return res.render('signin',{
+      error:'Incorrect Email and Password',
+    });
+  }
 })
 
-router.get("/signup",(req,res)=>{
-  return res.render("signup");
+router.get('/signup',(_,res)=>{
+  return res.render('signup');
 })
 
-router.post("/signup",async (req,res)=>{
+router.post('/signup',async (req,res)=>{
   const {fullName,email,password} = req.body;
   await User.create({
     fullName, email, password,
   });
-  return res.redirect("/");
+  return res.redirect('/');
 })
 
 module.exports = router;
