@@ -7,9 +7,6 @@ A simple and user-friendly blog application where users can sign up, log in, and
 - [Installation](#installation)
 - [Usage](#usage)
 - [Screenshots](#screenshots)
-- [Best Practices](#best-practices)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 - User authentication (Sign Up and Login).
